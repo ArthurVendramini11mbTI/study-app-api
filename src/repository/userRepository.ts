@@ -8,13 +8,18 @@ const userRepository = {
         })
     },
 
-    createUser(userData: createUserInput){
+    create(userData: createUserInput){
         return prisma.users.create({
             data:{
                 email: userData.email,
-                password: userData.password,
-                name: userData.name,
+                password: userData.password
             }
+        })
+    },
+
+    login(userData: createUserInput){
+        return prisma.users.findUnique({
+            where: {email: userData.email, password: userData.password}
         })
     }
 };

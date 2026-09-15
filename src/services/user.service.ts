@@ -1,4 +1,3 @@
-import { prisma } from "../lib/prisma";
 import type { createUserInput } from "../types/userTypes";
 import { userRepository } from '../repository/userRepository'
 
@@ -10,8 +9,26 @@ const createUserService = {
       throw new Error("Email já cadastrado");
     }
 
-    return await userRepository.createUser(userData)
+    return await userRepository.create(userData)
   }
 };
 
-export { createUserService };
+const loginService = {
+  async login(userData: createUserInput){
+    const existingUser = await userRepository.findByEmail(userData.email)
+
+    if(!existingUser){
+      throw new Error("Email não cadastrado")
+    }
+
+    const user = await userRepository.login(userData)
+
+    if(!user){
+      throw new Error("Senha inválida")
+    }
+
+    return user
+  }
+}
+
+export { createUserService, loginService };
