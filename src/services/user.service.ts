@@ -1,6 +1,7 @@
 import type { createUserInput } from "../types/userTypes";
 import { userRepository } from '../repository/userRepository'
 import bcrypt from "bcryptjs";
+import { createAccessToken } from "../lib/jwt";
 
 const createUserService = {
   async create(userData: createUserInput) {
@@ -28,7 +29,9 @@ const loginService = {
       throw new Error("Senha inválida")
     }
 
-    return user
+    const token = await createAccessToken(user.id);
+
+    return {user, token}
   }
 }
 
