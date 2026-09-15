@@ -1,6 +1,5 @@
 import { prisma } from "../lib/prisma";
 import type { createUserInput } from '../types/userTypes'
-import bcrypt from "bcryptjs";
 
 const userRepository = {
     findByEmail(userEmail: string){
@@ -15,12 +14,6 @@ const userRepository = {
                 email: userData.email,
                 password: userData.password
             }
-        })
-    },
-
-    login(userData: createUserInput){
-        return prisma.users.findUnique({
-            where: {email: userData.email, password: userData.password}
         })
     }
 };

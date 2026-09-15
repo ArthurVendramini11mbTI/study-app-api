@@ -1,5 +1,6 @@
 import type { createUserInput } from "../types/userTypes";
 import { userRepository } from '../repository/userRepository'
+import bcrypt from "bcryptjs";
 
 const createUserService = {
   async create(userData: createUserInput) {
@@ -15,15 +16,15 @@ const createUserService = {
 
 const loginService = {
   async login(userData: createUserInput){
-    const existingUser = await userRepository.findByEmail(userData.email)
+    const user = await userRepository.findByEmail(userData.email)
 
-    if(!existingUser){
+    if(!user){
       throw new Error("Email não cadastrado")
     }
 
-    const user = await userRepository.login(userData)
+    const passwordMatch = await bcrypt.compare(userData.password, user.password)
 
-    if(!user){
+    if(!passwordMatch){
       throw new Error("Senha inválida")
     }
 
