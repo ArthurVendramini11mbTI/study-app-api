@@ -8,6 +8,12 @@ const userRepository = {
         })
     },
 
+    findById(userId: number){
+        return prisma.users.findUnique({
+            where: {id: userId}
+        })
+    },
+
     create(userData: createUserInput){
         return prisma.users.create({
             data:{
