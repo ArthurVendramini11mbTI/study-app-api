@@ -1,19 +1,16 @@
 import { prisma } from "../lib/prisma";
 import type { createUserInput } from "../types/userTypes";
+import { userRepository } from '../repository/userRepository'
 
 const createUserService = {
-  async create(data: createUserInput) {
-    const existingUser = await prisma.users.findUnique({ where: { email: data.email }});
+  async create(userData: createUserInput) {
+    const existingUser = await userRepository.findByEmail(userData.email)
 
     if (existingUser) {
       throw new Error("Email já cadastrado");
     }
 
-    return await prisma.users.create({ data: {
-        name: data.name,
-        email: data.email,
-        password: data.password
-    } });
+    return await userRepository.createUser(userData)
   }
 };
 
