@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { createUserService, loginService } from "../services/user.service";
 import { createUserSchema } from '../schemas/userSchema'
+import bcrypt from "bcryptjs";
 
 export const createUser = async (req: Request, res: Response ) => {    
     const result = createUserSchema.safeParse(req.body)
@@ -10,9 +11,14 @@ export const createUser = async (req: Request, res: Response ) => {
             message: "Dados inválidos",
             errors: result.error,
         });
+    } 
+
+    const validCreateUserInput = {
+        email: result.data.email, 
+        password: bcrypt.hashSync(result.data.password ,10)
     }
 
-    const user = await createUserService.create(result.data)
+    const user = await createUserService.create(validCreateUserInput)
 
     return res.status(201).json(user)
 }

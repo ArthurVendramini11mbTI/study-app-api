@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma";
 import type { createUserInput } from '../types/userTypes'
+import bcrypt from "bcryptjs";
 
 const userRepository = {
     findByEmail(userEmail: string){
