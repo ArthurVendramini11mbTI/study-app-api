@@ -1,37 +1,8 @@
 import { Router } from "express";
+import { createUser } from "../controllers/user.controller";
 
-const router = Router();
+const userRouter = Router();
 
-router.get("/", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      name: "Arthur"
-    },
-    {
-      id: 2,
-      name: "Alexandre"
-    }
-  ]);
-});
+userRouter.get("/create-user", createUser);
 
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-
-  res.json({
-    id,
-    name: "Arthur"
-  });
-});
-
-router.post("/", (req, res) => {
-  const { name, email } = req.body;
-
-  res.status(201).json({
-    id: 3,
-    name,
-    email
-  });
-});
-
-export default router;
+export default userRouter;
