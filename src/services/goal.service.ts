@@ -7,7 +7,7 @@ const createGoalService = {
     const existingUser = await userRepository.findById(goalData.userId)
 
     if (!existingUser) {
-      throw new Error("Email já cadastrado");
+      throw new Error("Usuário não existe");
     }
 
     return await goalRepository.create(goalData)
