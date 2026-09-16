@@ -4,6 +4,6 @@ import { Auth } from '../middlewares/auth.middleware'
 
 const goalRouter = Router();
 
-goalRouter.post("/create-goal", createGoal);
+goalRouter.post("/create-goal", Auth.private, createGoal);
 
 export default goalRouter;
