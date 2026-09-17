@@ -7,6 +7,14 @@ const goalRepository = {
             data:{
                 title: goalData.tittle,
                 description: goalData.description,
+
+                accumulated_seconds: goalData.accumulated_seconds,
+                started_at: goalData.startedAt,
+                target_seconds: goalData.targetSeconds,
+
+                color: goalData.color,
+                icon: goalData.icon,
+                
                 user_id: goalData.userId
             }
         })

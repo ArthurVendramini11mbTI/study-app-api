@@ -6,7 +6,7 @@ import goalRouter from "./routes/goal.routes";
 const app = express();
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin: 'http://localhost:3000'}))
 
 app.use("/users", userRouter)
 app.use("/goals", goalRouter)
