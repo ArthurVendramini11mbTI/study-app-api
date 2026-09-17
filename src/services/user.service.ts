@@ -11,7 +11,11 @@ const createUserService = {
       throw new Error("Email já cadastrado");
     }
 
-    return await userRepository.create(userData)
+    const user = await userRepository.create(userData)
+
+    const token = await createAccessToken(user.id);
+
+    return {user, token}
   }
 };
 
