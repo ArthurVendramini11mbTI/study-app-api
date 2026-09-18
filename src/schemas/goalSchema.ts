@@ -1,12 +1,12 @@
 import { z } from 'zod'
 
 export const createGoalSchema = z.object({
-    tittle: z.string().min(2),
+    title: z.string().min(2),
     description: z.string().min(2),
 
-    accumulated_seconds: z.int(),
-    startedAt: z.date(),
-    targetSeconds: z.int(),
+    accumulatedSeconds: z.int(),
+    startedAt: z.date().nullable(),
+    targetSeconds: z.number().int().positive(),
 
     color: z.string().length(6),
     icon: z.string(),

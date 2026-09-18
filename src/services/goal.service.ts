@@ -1,8 +1,9 @@
 import type { createGoalInput } from "../types/goalTypes";
 import { goalRepository } from '../repository/goalRepository'
 import { userRepository } from "../repository/userRepository";
+import type { userId } from "../types/userTypes";
 
-const createGoalService = {
+const goalService = {
   async create(goalData: createGoalInput) {
     const existingUser = await userRepository.findById(goalData.userId)
 
@@ -11,8 +12,11 @@ const createGoalService = {
     }
 
     return await goalRepository.create(goalData)
+  },
+
+  async get(userId: userId) {
+    return await goalRepository.getGoals(userId)
   }
 };
 
-
-export { createGoalService };
+export { goalService }
