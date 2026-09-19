@@ -20,16 +20,9 @@ export const createGoal = async (req: Request, res: Response ) => {
 }
 
 export const getGoals = async (req: Request, res: Response ) => {    
-    const result = userIdSchema.safeParse(req.body.userId)
+    const userId = userIdSchema.safeParse(req.userId)
 
-    if (!result.success) {
-        return res.status(400).json({
-            message: "Dados inválidos",
-            errors: result.error,
-        });
-    } 
-
-    const goals = await goalService.get(result.data)
+    const goals = await goalService.get(userId.data)
 
     return res.status(201).json(goals)
 }
