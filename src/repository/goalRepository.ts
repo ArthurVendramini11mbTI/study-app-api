@@ -3,7 +3,7 @@ import type { createGoalInput } from '../types/goalTypes'
 import type { userId } from '../types/userTypes'
 
 const goalRepository = {
-    create(goalData: createGoalInput){
+    create(goalData: createGoalInput, userId: userId){
         return prisma.goals.create({
             data:{
                 title: goalData.title,
@@ -16,7 +16,7 @@ const goalRepository = {
                 color: goalData.color,
                 icon: goalData.icon,
                 
-                user_id: goalData.userId
+                user_id: userId
             }
         })
     },

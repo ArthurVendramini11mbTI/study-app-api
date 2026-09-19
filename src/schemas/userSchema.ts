@@ -5,4 +5,4 @@ export const createUserSchema = z.object({
     password: z.string().min(6)
 })
 
-export const userId = z.int().min(1)
+export const userIdSchema = z.int().min(1)
