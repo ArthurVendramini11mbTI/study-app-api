@@ -18,9 +18,15 @@ export const Auth = {
         try {
             const payload = await verifyAccessToken(token);
 
-            console.log(payload);
+            if (!payload.sub) {
+                return res.status(401).json({
+                message: "Token inválido",
+                });
+            }
+
+            req.userId = Number(payload.sub);
+
             next();
-            
         } catch {
             return res.status(401).json({message: "Token inválido ou expirado",});
         }

@@ -14,7 +14,7 @@ model goals {
   user_id             Int
   created_at          DateTime? @default(now()) @db.Timestamp(6)
   accumulated_seconds Int
-  color               String    @db.VarChar(6)
+  color               String    @db.VarChar(7)
   icon                String    @db.VarChar(30)
   started_at          DateTime?
   target_seconds      Int

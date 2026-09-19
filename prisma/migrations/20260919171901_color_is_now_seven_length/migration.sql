@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "goals" ALTER COLUMN "color" SET DATA TYPE VARCHAR(7);

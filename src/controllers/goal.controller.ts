@@ -5,6 +5,7 @@ import { userId } from '../schemas/userSchema'
 
 export const createGoal = async (req: Request, res: Response ) => {    
     const result = createGoalSchema.safeParse(req.body)
+    const id = req.userId
 
     if (!result.success) {
         return res.status(400).json({
