@@ -1,6 +1,6 @@
 import { prisma } from "../lib/prisma";
-import type { createGoalInput } from '../types/goalTypes'
-import type { userId } from '../types/userTypes'
+import type { createGoalInput, goalIdType } from '../types/goalTypes'
+import type { userId,  } from '../types/userTypes'
 
 const goalRepository = {
     create(goalData: createGoalInput, userId: userId){
@@ -36,10 +36,11 @@ const goalRepository = {
         })
     },
 
-    delete(goalId: number){
+    delete(goalId: goalIdType, userId: userId){
         return prisma.goals.delete({
             where:{
-                id: goalId
+                id: goalId,
+                user_id: userId
             }
         })
     }

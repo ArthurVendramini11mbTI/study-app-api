@@ -34,3 +34,4 @@ export const createGoalSchema = z
     };
   });
 
+export const goalIdSchema = z.int().min(1)
