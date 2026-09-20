@@ -28,9 +28,19 @@ const goalRepository = {
                 icon: true,
                 color: true,
                 target_seconds:true, 
-                accumulated_seconds: true
+                accumulated_seconds: true,
+                id: true,
+                description: true
             },
             where: {user_id: userId}
+        })
+    },
+
+    delete(goalId: number){
+        return prisma.goals.delete({
+            where:{
+                id: goalId
+            }
         })
     }
 };
