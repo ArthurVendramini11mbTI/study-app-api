@@ -18,6 +18,10 @@ const goalService = {
     return await goalRepository.getGoals(userId)
   },
 
+  async update(goalId: goalIdType, goalData: createGoalInput, userId: userId) {
+    return await goalRepository.update(goalId, goalData, userId)
+  },
+
   async delete(goalId: goalIdType, userId: userId) {
     const deleteGoal = await goalRepository.delete(goalId, userId)
 

@@ -36,6 +36,22 @@ const goalRepository = {
         })
     },
 
+    update(goalId: goalIdType, goalData: createGoalInput, userId: userId){
+        return prisma.goals.update({
+            where:{
+                id: goalId,
+                user_id: userId
+            },
+            data:{
+                title: goalData.title,
+                description: goalData.description,
+                target_seconds: goalData.targetSeconds,
+                color: goalData.color,
+                icon: goalData.icon
+            }
+        })
+    },
+
     delete(goalId: goalIdType, userId: userId){
         return prisma.goals.delete({
             where:{
