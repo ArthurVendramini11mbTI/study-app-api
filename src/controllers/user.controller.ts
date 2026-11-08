@@ -8,7 +8,7 @@ export const createUser = async (req: Request, res: Response ) => {
 
     if (!result.success) {
         return res.status(400).json({
-            message: "Dados inválidos",
+            message: "Invalid data",
             errors: result.error,
         });
     } 
@@ -28,7 +28,7 @@ export const login = async (req: Request, res: Response) => {
 
     if (!result.success) {
         return res.status(400).json({
-            message: "Dados inválidos",
+            message: "Invalid data",
             errors: result.error,
         });
     }

@@ -6,13 +6,13 @@ export const Auth = {
         const authorization = req.headers.authorization;
 
         if (!authorization) {
-            return res.status(401).json({message: "Token não enviado",});
+            return res.status(401).json({message: "Token was not provided",});
         }
 
         const [type, token] = authorization.split(" ");
 
         if (type !== "Bearer" || !token) {
-            return res.status(401).json({message: "Token inválido",});
+            return res.status(401).json({message: "Invalid token",});
         }
 
         try {
@@ -20,7 +20,7 @@ export const Auth = {
 
             if (!payload.sub) {
                 return res.status(401).json({
-                message: "Token inválido",
+                message: "Invalid token",
                 });
             }
 
@@ -28,7 +28,7 @@ export const Auth = {
 
             next();
         } catch {
-            return res.status(401).json({message: "Token inválido ou expirado",});
+            return res.status(401).json({message: "Invalid or expired token",});
         }
     }
 }

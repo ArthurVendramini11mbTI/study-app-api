@@ -35,3 +35,7 @@ export const createGoalSchema = z
   });
 
 export const goalIdSchema = z.int().min(1)
+
+export const trackGoalTimeSchema = z.object({
+  action: z.enum(['start', 'stop'])
+})

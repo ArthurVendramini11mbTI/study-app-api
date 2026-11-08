@@ -8,7 +8,7 @@ const createUserService = {
     const existingUser = await userRepository.findByEmail(userData.email)
 
     if (existingUser) {
-      throw new Error("Email já cadastrado");
+      throw new Error("Email is already registered");
     }
 
     const user = await userRepository.create(userData)
@@ -24,13 +24,13 @@ const loginService = {
     const user = await userRepository.findByEmail(userData.email)
 
     if(!user){
-      throw new Error("Email não cadastrado")
+      throw new Error("Email is not registered")
     }
 
     const passwordMatch = await bcrypt.compare(userData.password, user.password)
 
     if(!passwordMatch){
-      throw new Error("Senha inválida")
+      throw new Error("Invalid password")
     }
 
     const token = await createAccessToken(user.id);

@@ -30,9 +30,46 @@ const goalRepository = {
                 target_seconds:true, 
                 accumulated_seconds: true,
                 id: true,
-                description: true
+                description: true,
+                started_at: true
             },
             where: {user_id: userId}
+        })
+    },
+
+    findById(goalId: goalIdType, userId: userId){
+        return prisma.goals.findUnique({
+            where:{
+                id: goalId,
+                user_id: userId
+            }
+        })
+    },
+
+    startTimeTracking(goalId: goalIdType, userId: userId, startedAt: Date){
+        return prisma.goals.update({
+            where:{
+                id: goalId,
+                user_id: userId
+            },
+            data:{
+                started_at: startedAt
+            }
+        })
+    },
+
+    stopTimeTracking(goalId: goalIdType, userId: userId, elapsedSeconds: number){
+        return prisma.goals.update({
+            where:{
+                id: goalId,
+                user_id: userId
+            },
+            data:{
+                accumulated_seconds: {
+                    increment: elapsedSeconds
+                },
+                started_at: null
+            }
         })
     },
 
