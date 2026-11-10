@@ -1,4 +1,4 @@
-import type { createUserInput, loginUserInput } from "../types/userTypes";
+import type { createUserInput, loginUserInput, themePalette } from "../types/userTypes";
 import { userRepository } from '../repository/userRepository'
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../lib/jwt";
@@ -72,4 +72,11 @@ const getSessionService = {
   }
 }
 
-export { createUserService, loginService, getSessionService };
+const updateThemeService = {
+  async update(userId: number, theme: themePalette) {
+    const user = await userRepository.updateTheme(userId, theme)
+    return toPublicUser(user)
+  }
+}
+
+export { createUserService, loginService, getSessionService, updateThemeService };

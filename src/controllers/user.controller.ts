@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { createUserService, getSessionService, loginService } from "../services/user.service";
-import { createUserSchema, loginUserSchema } from '../schemas/userSchema'
+import { createUserService, getSessionService, loginService, updateThemeService } from "../services/user.service";
+import { createUserSchema, loginUserSchema, updateThemeSchema } from '../schemas/userSchema'
 import { clearAuthCookie, setAuthCookie } from '../lib/authCookie'
 
 export const createUser = async (req: Request, res: Response ) => {    
@@ -43,4 +43,18 @@ export const getSession = async (req: Request, res: Response) => {
 export const logout = (_req: Request, res: Response) => {
     clearAuthCookie(res)
     return res.status(204).send()
+}
+
+export const updateTheme = async (req: Request, res: Response) => {
+    const result = updateThemeSchema.safeParse(req.body)
+
+    if (!result.success) {
+        return res.status(400).json({
+            message: "Invalid theme",
+            errors: result.error,
+        })
+    }
+
+    const user = await updateThemeService.update(req.userId!, result.data.theme)
+    return res.status(200).json({ theme: user.theme })
 }

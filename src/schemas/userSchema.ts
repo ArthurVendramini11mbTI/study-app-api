@@ -2,6 +2,18 @@ import { z } from 'zod'
 
 const emailSchema = z.string().trim().toLowerCase().max(254).pipe(z.email())
 
+export const themePaletteSchema = z.enum([
+    'blue',
+    'emerald',
+    'crimson',
+    'violet',
+    'amber',
+])
+
+export const updateThemeSchema = z.object({
+    theme: themePaletteSchema,
+})
+
 export const createUserSchema = z.object({
     email: emailSchema,
     password: z.string().min(8).max(72)

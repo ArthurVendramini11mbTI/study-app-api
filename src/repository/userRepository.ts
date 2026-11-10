@@ -1,5 +1,5 @@
 import { prisma } from "../lib/prisma";
-import type { createUserInput } from '../types/userTypes'
+import type { createUserInput, themePalette } from '../types/userTypes'
 
 const userRepository = {
     findByEmail(userEmail: string){
@@ -20,6 +20,13 @@ const userRepository = {
                 email: userData.email,
                 password: userData.password
             }
+        })
+    },
+
+    updateTheme(userId: number, theme: themePalette){
+        return prisma.users.update({
+            where: {id: userId},
+            data: {theme}
         })
     }
 };
